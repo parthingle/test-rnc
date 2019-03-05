@@ -11,26 +11,39 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { LoginButton } from 'react-native-fbsdk';
 
+import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
 
-export default class App extends Component {
+class Screen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <LoginButton
-          publishPermissions={["email"]}
-          onLoginFinished={
-            (error, result) => {
-              if (error) {
-                alert("Login failed with error: " + error.message);
-              } else if (result.isCancelled) {
-                alert("Login was cancelled");
-              } else {
-                alert("Login was successful with permissions: " + result.grantedPermissions)
-              }
-            }
-          }
-          onLogoutFinished={() => alert("User logged out")} />
+        <Text style={styles.welcome}> This is Screen 1</Text>
+      </View>
+    )
+  }
+}
+
+class Screen2 extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}> This is Screen 2</Text>
+      </View>
+    )
+  }
+}
+const TabNavigator = createBottomTabNavigator({
+  Screen1: Screen,
+  Screen2: Screen2,
+});
+
+export default createAppContainer(TabNavigator);
+class App extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+
       </View>
     );
   }
